@@ -22,4 +22,4 @@ jobs:
       shell: bash
 
     - name: Run Gitleaks
-      run: gitleaks detect
+      run: gitleaks -v
