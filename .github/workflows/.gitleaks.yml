@@ -15,10 +15,8 @@ jobs:
 
     - name: Install Gitleaks
       run: |
-        wget https://github.com/zricethezav/gitleaks/releases/download/v7.2.1/gitleaks-linux-amd64
-        mv gitleaks-linux-amd64 gitleaks
-        chmod +x gitleaks
-        sudo mv gitleaks /usr/local/bin/
+        sudo apt-get update
+        sudo apt-get install -y gitleaks
       shell: bash
 
     - name: Run Gitleaks
