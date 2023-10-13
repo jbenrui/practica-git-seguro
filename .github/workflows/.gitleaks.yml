@@ -1,24 +1,14 @@
-name: Gitleaks Check
+#!/bin/bash
 
-on:
-  push:
-    branches:
-      - master
-jobs:
-  gitleaks:
-    runs-on: ubuntu-latest
+# Descarga e instala gitleaks si no está instalado
+if ! command -v gitleaks &> /dev/null; then
+  echo "Instalando gitleaks..."
+  wget https://github.com/zricethezav/gitleaks/releases/download/v7.2.1/gitleaks-linux-amd64
+  mv gitleaks-linux-amd64 gitleaks
+  chmod +x gitleaks
+  sudo mv gitleaks /usr/local/bin/
+fi
 
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Install Gitleaks
-      run: |
-        wget https://github.com/zricethezav/gitleaks/releases/download/v7.2.1/gitleaks-linux-amd64
-        mv gitleaks-linux-amd64 gitleaks
-        chmod +x gitleaks
-        sudo mv gitleaks /usr/local/bin/
-      shell: bash
-
-    - name: Run Gitleaks
-      run: gitleaks detect
+# Ejecuta gitleaks
+echo "Ejecutando gitleaks..."
+gitleaks detect
