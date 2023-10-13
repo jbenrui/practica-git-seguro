@@ -1,14 +1,25 @@
 name: Gitleaks Check
 
-on: [push]
+on:
+  push:
+    branches:
+      - origin
 
 jobs:
   gitleaks:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Run Gitleaks
+    - name: Install Gitleaks
       run: |
-        docker run --rm -v $(pwd):/code/ zricethezav/gitleaks --verbose
+        wget https://github.com/zricethezav/gitleaks/releases/download/v7.2.1/gitleaks-linux-amd64
+        mv gitleaks-linux-amd64 gitleaks
+        chmod +x gitleaks
+        sudo mv gitleaks /usr/local/bin/
+      shell: bash
+
+    - name: Run Gitleaks
+      run: gitleaks detect
