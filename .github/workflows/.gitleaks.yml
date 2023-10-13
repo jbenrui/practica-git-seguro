@@ -3,7 +3,7 @@ name: Gitleaks Check
 on:
   push:
     branches:
-      - origin
+      - master
 
 jobs:
   gitleaks:
