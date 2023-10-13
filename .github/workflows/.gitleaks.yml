@@ -1,0 +1,14 @@
+name: Gitleaks Check
+
+on: [push]
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Gitleaks
+      run: |
+        docker run --rm -v $(pwd):/code/ zricethezav/gitleaks --verbose
