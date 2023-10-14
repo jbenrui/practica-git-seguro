@@ -13,7 +13,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Install Gitleaks
+        run: sudo apt-get update && sudo apt-get install gitleaks -y
+
       - name: Run Gitleaks
-        uses: gitleaks/action@v4
-        with:
-          config: .gitleaks.toml
+        run: gitleaks -c .gitleaks.toml
