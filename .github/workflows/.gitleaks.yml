@@ -10,13 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Install Gitleaks
-        run: |
-          sudo apt-get update
-          sudo apt-get install gitleaks -y
+    - name: Install Gitleaks
+      run: |
+        wget https://github.com/zricethezav/gitleaks/releases/download/v7.2.1/gitleaks-linux-amd64
+        mv gitleaks-linux-amd64 gitleaks
+        chmod +x gitleaks
+        sudo mv gitleaks /usr/local/bin/
+      shell: bash
 
-      - name: Run Gitleaks
-        run: gitleaks detect
+    - name: Run Gitleaks
+      run: gitleaks detect
