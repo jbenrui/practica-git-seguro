@@ -12,9 +12,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          node-version: 16
 
       - name: Install Gitleaks
         run: sudo apt-get update && sudo apt-get install gitleaks -y
 
       - name: Run Gitleaks
-        run: gitleaks -c .gitleaks.toml
+        run: gitleaks detect
