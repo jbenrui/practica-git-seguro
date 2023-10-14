@@ -16,4 +16,4 @@ jobs:
       - name: Run Gitleaks
         uses: gitleaks/action@v4
         with:
-          languages: all
+          config: .gitleaks.toml
